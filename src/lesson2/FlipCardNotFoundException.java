@@ -1,4 +1,4 @@
-package main.lesson2;
+package lesson2;
 
 public class FlipCardNotFoundException extends RuntimeException {
 	public FlipCardNotFoundException(String msg) {
