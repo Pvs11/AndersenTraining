@@ -1,16 +1,27 @@
 package lesson2;
 
-import java.util.HashSet;
-import java.util.Set;
+import lesson4.PropertiesLoader;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class Database {
-	private Set<FlipCard> flipCards = new HashSet<>();
+	private static final Properties properties = PropertiesLoader.loadProperties();
 
-	public Set<FlipCard> getFlipCards() {
-		return flipCards;
-	}
+	private Connection connection;
 
-	public void setFlipCards(Set<FlipCard> flipCards) {
-		this.flipCards = flipCards;
+	public Connection getNewConnection() {
+		try {
+			connection = DriverManager.getConnection(
+					properties.getProperty("DB_URL"),
+					properties.getProperty("DB_USERNAME"),
+					properties.getProperty("DB_PASSWORD")
+			);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return connection;
 	}
 }

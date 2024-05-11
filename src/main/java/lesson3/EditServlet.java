@@ -20,7 +20,7 @@ public class EditServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter pr = resp.getWriter();
 		pr.println("<html><body><p>Here you see the list of all FlipCards");
-		for (FlipCard flipcard : service.getAllFlipCards()) {
+		for (FlipCard flipcard : service.getFlipCards()) {
 			pr.print("<p>" + flipcard.getNativeWord() + " - " + flipcard.getTranslationWord() + "</p>");
 			pr.println(String.format("<a href=\"/webAppExploded/edit/%s\">edit</a>", flipcard.getId()));
 		}
