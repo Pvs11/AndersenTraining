@@ -3,9 +3,8 @@ package lesson2;
 import java.util.Objects;
 
 public class FlipCard {
-	private static int count = 1;
+
 	public FlipCard(String nativeWord, String translationWord) {
-		this.id = count++;
 		this.nativeWord = nativeWord;
 		this.translationWord = translationWord;
 	}
@@ -47,6 +46,10 @@ public class FlipCard {
 		this.incorrectTries = incorrectTries;
 	}
 
+	public boolean isEmpty() {
+		return Objects.equals(this.getNativeWord(), "") || Objects.equals(this.getTranslationWord(), "");
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -61,6 +64,6 @@ public class FlipCard {
 
 	@Override
 	public String toString() {
-		return 	id + ": " + nativeWord + " - " + translationWord;
+		return id + ": " + nativeWord + " - " + translationWord;
 	}
 }

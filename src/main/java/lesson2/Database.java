@@ -14,12 +14,13 @@ public class Database {
 
 	public Connection getNewConnection() {
 		try {
+			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(
 					properties.getProperty("DB_URL"),
 					properties.getProperty("DB_USERNAME"),
 					properties.getProperty("DB_PASSWORD")
 			);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return connection;

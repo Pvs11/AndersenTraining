@@ -33,11 +33,15 @@ public class AddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nativeWord = req.getParameter("nativeWord");
 		String translation = req.getParameter("translation");
-		service.addFlipCard(new FlipCard(nativeWord, translation));
+		boolean addSuccessful = service.addFlipCard(new FlipCard(nativeWord, translation));
 		resp.setContentType("text/html");
 		PrintWriter pr = resp.getWriter();
 		pr.println("<html>");
-		pr.println("<body><p>Thanks! Your word pair has been added<p>");
+		if (addSuccessful) {
+			pr.println("<body><p>Thanks! Your word pair has been added<p>");
+		} else {
+			pr.println("<body><p>It is pointless to add empty card! Try again<p>");
+		}
 		pr.println("<a href=\"/webAppExploded\">home page</a>");
 		pr.println("</body></html>");
 		pr.close();

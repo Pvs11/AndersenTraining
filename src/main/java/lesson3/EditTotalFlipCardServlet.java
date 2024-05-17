@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "editServlet", urlPatterns = "/edit")
-public class EditServlet extends HttpServlet {
+public class EditTotalFlipCardServlet extends HttpServlet {
 	private final MemorizeService service = ServletConfiguration.getService();
 
 	@Override
@@ -21,7 +21,7 @@ public class EditServlet extends HttpServlet {
 		PrintWriter pr = resp.getWriter();
 		pr.println("<html><body><p>Here you see the list of all FlipCards");
 		for (FlipCard flipcard : service.getFlipCards()) {
-			pr.print("<p>" + flipcard.getNativeWord() + " - " + flipcard.getTranslationWord() + "</p>");
+			pr.print("<p> id=" + flipcard.getId() + ":" + flipcard.getNativeWord() + " - " + flipcard.getTranslationWord() + "</p>");
 			pr.println(String.format("<a href=\"/webAppExploded/edit/%s\">edit</a>", flipcard.getId()));
 		}
 		pr.println("</body></html>");

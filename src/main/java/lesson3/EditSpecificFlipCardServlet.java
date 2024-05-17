@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "editSpecificServlet", urlPatterns = "/edit/*")
-public class EditFlipCardServlet extends HttpServlet {
+public class EditSpecificFlipCardServlet extends HttpServlet {
 	private final MemorizeService service = ServletConfiguration.getService();
 
 	@Override
@@ -28,11 +28,24 @@ public class EditFlipCardServlet extends HttpServlet {
 		pr.println("<html><body><p>Edit page");
 		pr.print("<p>" + flipcard.getNativeWord() + " - " + flipcard.getTranslationWord() + "</p>");
 
-		pr.println("<form name=\"editForm\" method=\"put\" action=\"/webAppExploded/edit/\"" + id + "/>");
+		pr.println("<form name=\"editForm\" method=\"post\" action=\"/webAppExploded/edit/\"" + id + ">");
 		pr.println("nativeWord: <input type=\"text\" name=\"newNativeWord\"/><br/>");
 		pr.println("translation: <input type=\"text\" name=\"newTranslation\"/><br/>");
 		pr.println("<input type=\"submit\" value=\"update\"></form>");
 
+		pr.println("</body></html>");
+		pr.close();
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int id =  Integer.parseInt(req.getPathInfo().substring(1));
+		FlipCard newFlipcard = new FlipCard(req.getParameter("newNativeWord"), req.getParameter("newTranslation"));
+		service.editFlipCard(id, newFlipcard);
+		resp.setContentType("text/html");
+		PrintWriter pr = resp.getWriter();
+		pr.println("<html><body><p>Flipcard updated successfully!");
+		pr.print("<p>" + newFlipcard.getNativeWord() + " - " + newFlipcard.getTranslationWord() + "</p>");
 		pr.println("</body></html>");
 		pr.close();
 	}

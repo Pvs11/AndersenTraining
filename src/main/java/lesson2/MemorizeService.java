@@ -4,11 +4,10 @@ import java.util.Set;
 
 public interface MemorizeService {
 	boolean addFlipCard(FlipCard flipCard);
-//	boolean editFlipCard(FlipCard cardToEdit, FlipCard newFlipCard);
-//	boolean removeFlipCard(FlipCard flipCard);
-//	FlipCard getRandomCard();
+	boolean editFlipCard(int oldId, FlipCard newFlipCard);
+	boolean removeFlipCard(int id);
+	FlipCard getRandomCard();
 	FlipCard findFlipCardByNativeWord(String nativeWord);
 	Set<FlipCard> getFlipCards();
-
 	FlipCard findFlipCardById(int id);
 }
