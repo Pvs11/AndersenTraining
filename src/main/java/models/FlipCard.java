@@ -1,49 +1,30 @@
-package lesson2;
+package models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
+@Table(name = "flipcards")
+@Entity
 public class FlipCard {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(name = "native_word")
+	private String nativeWord;
+	@Column(name = "translation")
+	private String translationWord;
+	@Transient
+	private int incorrectTries = 0;
 
 	public FlipCard(String nativeWord, String translationWord) {
 		this.nativeWord = nativeWord;
 		this.translationWord = translationWord;
-	}
-
-	private int id;
-	private String nativeWord;
-	private String translationWord;
-	private int incorrectTries = 0;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNativeWord() {
-		return nativeWord;
-	}
-
-	public void setNativeWord(String nativeWord) {
-		this.nativeWord = nativeWord;
-	}
-
-	public String getTranslationWord() {
-		return translationWord;
-	}
-
-	public void setTranslationWord(String translationWord) {
-		this.translationWord = translationWord;
-	}
-
-	public int getIncorrectTries() {
-		return incorrectTries;
-	}
-
-	public void setIncorrectTries(int incorrectTries) {
-		this.incorrectTries = incorrectTries;
 	}
 
 	public boolean isEmpty() {

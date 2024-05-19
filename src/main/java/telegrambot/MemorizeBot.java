@@ -1,7 +1,7 @@
 //package main.lesson2.telegrambot;
 //
-//import main.lesson2.FlipCard;
-//import main.lesson2.MemorizeService;
+//import main.models.FlipCard;
+//import main.service.MemorizeService;
 //import org.apache.commons.lang3.StringUtils;
 //import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 //import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;

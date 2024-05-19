@@ -1,11 +1,12 @@
-package lesson3;
+package servlets;
 
+import config.ServletConfiguration;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lesson2.MemorizeService;
+import service.MemorizeService;
 
 import java.io.IOException;
 import java.io.PrintWriter;

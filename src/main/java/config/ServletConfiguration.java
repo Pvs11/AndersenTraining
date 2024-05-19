@@ -1,7 +1,7 @@
-package lesson3;
+package config;
 
-import lesson2.MemorizeService;
-import lesson2.MemorizeServiceImpl;
+import service.MemorizeService;
+import service.MemorizeServiceImpl;
 
 public class ServletConfiguration {
 	private static final MemorizeService service = new MemorizeServiceImpl();

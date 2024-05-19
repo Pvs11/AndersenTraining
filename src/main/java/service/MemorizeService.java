@@ -1,4 +1,6 @@
-package lesson2;
+package service;
+
+import models.FlipCard;
 
 import java.util.Set;
 
