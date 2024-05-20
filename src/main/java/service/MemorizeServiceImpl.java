@@ -28,7 +28,9 @@ public class MemorizeServiceImpl implements MemorizeService {
 	@Override
 	public Set<FlipCard> getFlipCards() {
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		Set<FlipCard> resultSet = new HashSet<>(session.createQuery("select f from FlipCard f", FlipCard.class).list());
+		session.getTransaction().commit();
 		session.close();
 		return resultSet;
 	}
@@ -36,7 +38,9 @@ public class MemorizeServiceImpl implements MemorizeService {
 	@Override
 	public FlipCard findFlipCardById(int id) {
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		FlipCard flipCard = session.get(FlipCard.class, id);
+		session.getTransaction().commit();
 		session.close();
 		return flipCard;
 	}
@@ -44,9 +48,11 @@ public class MemorizeServiceImpl implements MemorizeService {
 	@Override
 	public FlipCard findFlipCardByNativeWord(String nativeWord) {
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		FlipCard flipCard = session.createQuery("select f from FlipCard f where nativeWord= :nativeWord", FlipCard.class)
 				.setParameter("nativeWord", nativeWord)
 				.uniqueResult();
+		session.getTransaction().commit();
 		session.close();
 		return flipCard;
 	}
@@ -85,12 +91,14 @@ public class MemorizeServiceImpl implements MemorizeService {
 	public FlipCard getRandomCard() {
 		List<Integer> idList;
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		idList = session.createQuery("select f.id from FlipCard f", Integer.class).list();
 		idList.sort(Comparator.comparingInt(Integer::intValue));
 		int randomId = idList.get(new Random().nextInt(0, idList.size()));
 		FlipCard randomFlipCard = session.createQuery("from FlipCard f where f.id=:id", FlipCard.class)
 				.setParameter("id", randomId)
 				.uniqueResult();
+		session.getTransaction().commit();
 		session.close();
 		return randomFlipCard;
 	}
